@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@android:color/transparent"
+    android:layout_width="match_parent"
+    android:layout_height="200dp">
+
+    <RelativeLayout
+        android:layout_margin="5dp"
+        android:paddingBottom="2dp"
+        android:background="@drawable/curved_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/header"
+            android:gravity="center_vertical|right"
+            android:padding="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/img_hidden"
+                android:visibility="invisible"
+                android:layout_width="@dimen/list_icon_size"
+                android:layout_height="@dimen/list_icon_size" />
+            <ImageButton
+                android:id="@+id/set"
+                android:padding="2dp"
+                android:layout_marginRight="20dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_desktop"
+                android:layout_width="@dimen/list_icon_size"
+                android:layout_height="@dimen/list_icon_size" />
+            <ImageButton
+                android:padding="2dp"
+                android:layout_marginRight="20dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_lover"
+                android:layout_width="@dimen/list_icon_size"
+                android:layout_height="@dimen/list_icon_size" />
+            <ImageButton
+                android:padding="2dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_cancel"
+                android:layout_width="@dimen/list_icon_size"
+                android:layout_height="@dimen/list_icon_size" />
+        </LinearLayout>
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:layout_below="@id/header"
+            android:id="@+id/img"
+            android:src="@drawable/c7"
+            app:riv_border_color="@android:color/transparent"
+            app:riv_border_width="0dp"
+            app:riv_corner_radius_bottom_left="10dp"
+            app:riv_corner_radius_bottom_right="10dp"
+            app:riv_oval="false"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+
+</LinearLayout>
