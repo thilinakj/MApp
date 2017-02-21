@@ -4,8 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
+import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.thilinas.mapp.R;
 
@@ -14,11 +15,19 @@ import com.thilinas.mapp.R;
  */
 
 public class WaveProgressDialog extends ProgressDialog {
+    private static WaveProgressDialog Instance;
     private ProgressBar progressBar;
     private Context context;
+    private TextView msg;
+    static String messageBody ="";
     public WaveProgressDialog(Context context) {
         super(context);
         this.context = context;
+    }
+    public WaveProgressDialog(Context context,String message) {
+        super(context);
+        this.context = context;
+        messageBody = message;
     }
     public WaveProgressDialog(Context context, int theme) {
         super(context, theme);
@@ -30,19 +39,33 @@ public class WaveProgressDialog extends ProgressDialog {
         this.context = context;
     }
 
-    public static WaveProgressDialog ctor(Context context) {
-        WaveProgressDialog dialog = new WaveProgressDialog(context);
-        dialog.setIndeterminate(true);
-        dialog.setCancelable(false);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.show();
-        return dialog;
+    public synchronized static WaveProgressDialog getInstance(Context context,String message) {
+        if ( Instance == null ){
+            Instance = new WaveProgressDialog(context);
+            Instance.setIndeterminate(true);
+            Instance.setCancelable(false);
+            messageBody = message;
+            Instance.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            Instance.show();
+        }else{
+            messageBody = message;
+            Instance.show();
+        }
+        return Instance;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_progress);
+        msg = (CustomTextView) findViewById(R.id.cstText);
+        if(messageBody.length()>0){
+            msg.setText(messageBody);
+            msg.setVisibility(View.VISIBLE);
+        }else{
+            msg.setVisibility(View.GONE);
+        }
+
       /*  progressBar = (ProgressBar) findViewById(R.id.progressBar);
         Wave anim = new Wave();
         anim.setColor(ContextCompat.getColor(context, R.color.lime_green_1));
